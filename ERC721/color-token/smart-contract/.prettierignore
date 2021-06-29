@@ -1,0 +1,7 @@
+coverage
+node_modules
+build
+AdministratorStorage.sol
+ERC20Storage.sol
+BaseUpgradeabilityProxy.sol
+utils/BIP39-MnemonicCode.html
