@@ -7,7 +7,7 @@ contract Color is ERC721 {
   string[] public colors;
   mapping(string => bool) _colorExists;
 
-  constructor() ERC721("Color", "COLOR") public{
+  constructor() ERC721("Color", "COLOR"){
   }
 
   //e.g. color = "#ffffff"
@@ -15,7 +15,8 @@ contract Color is ERC721 {
     //Require unique color
     require(!_colorExists[_color], "Token with this color is already defined");
     //Color - add it
-    uint _id = colors.push(_color); //push returns the length of the new array
+    colors.push(_color);
+    uint _id = colors.length;
     //Call the mint function
     _mint(msg.sender, _id);
     //Color - track it
