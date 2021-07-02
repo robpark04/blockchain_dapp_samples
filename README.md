@@ -16,7 +16,7 @@ Mint own color tokens and explore the entire color tokens based on ERC721
 * CircleCI
 * Netlify
 
-### 소스 업데이트 받기
+### ToDo
 
 <p>Install the MetaMask chrome extension</p>
 
