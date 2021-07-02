@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { ModalProvider } from "@area2k/use-modal";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Authenticated from "./routes/Authenticated";
 import Explorer from "./routes/Explorer/index";
@@ -73,12 +73,12 @@ const App = () => {
     return (
         <BrowserRouter>
             <ModalProvider>
-                <Routes>
+                <Switch>
                     <Route element={<Authenticated />}>
                         <Route element={<Explorer />} path="/" />
                         <Route element={<MyTokens />} path="/my" />
                     </Route>
-                </Routes>
+                </Switch>
             </ModalProvider>
         </BrowserRouter>
     );

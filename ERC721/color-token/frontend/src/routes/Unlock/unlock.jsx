@@ -16,9 +16,7 @@ import {
     CONNECTION_CONNECTED,
 } from "../../constants/constants.jsx";
 
-import Store from "../../stores/store.jsx";
-const emitter = Store.emitter;
-const store = Store.store;
+import { Store } from "../../stores/store";
 
 const styles = (theme) => ({
     root: {

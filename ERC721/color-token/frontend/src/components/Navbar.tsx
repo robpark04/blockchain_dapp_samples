@@ -9,9 +9,9 @@ import {
     CONNECTION_DISCONNECTED,
     CONFIGURE,
 } from "../constants/constants.jsx";
-import { dispatcher, emitter } from "src/utils/index.js";
+import { dispatcher, emitter } from "../utils";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
-import { getNet } from "src/stores/netSlice.js";
+import { getNet } from "../stores/netSlice";
 
 const Navbar = () => {
     const net = useAppSelector(getNet);
