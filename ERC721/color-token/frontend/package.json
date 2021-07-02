@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "A simple ERC-720 Color token",
   "author": "mtroz310@gmail.com",
-  "homepage": "https://github.com/JeyDev310/blockchain-dapp-samples",
+  "homepage": ".",
   "dependencies": {
     "@area2k/use-form": "0.0.2",
     "@area2k/use-modal": "0.0.1",
