@@ -1,19 +1,21 @@
 import React, { useEffect } from "react";
 import { ModalProvider } from "@area2k/use-modal";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect, withRouter } from "react-router-dom";
 
-import Authenticated from "./routes/Authenticated";
 import Explorer from "./routes/Explorer/index";
 import MyTokens from "./routes/Explorer/mytokens";
 
 import "./styles/css/app.css";
 
-import { injected } from "./stores/connectors.jsx";
-import { CONNECTION_CONNECTED } from "./constants/constants.jsx";
-import { setAccount, setWeb3Context, getNet } from './stores/netSlice';
+import { injected } from "./stores/connectors";
+import { CONNECTION_CONNECTED } from "./constants/constants";
+import { getNet } from "./stores/netReducer";
+import { setAccount, setWeb3Context } from "./stores/netAction";
 import Web3 from "web3";
 import { useAppDispatch, useAppSelector } from "./hooks/hooks";
 import { emitter } from "./utils";
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
 
 const App = () => {
     const net = useAppSelector(getNet);
@@ -54,12 +56,12 @@ const App = () => {
         if (window.ethereum) {
             updateAccount();
         } else {
-            if (typeof web3 !== "undefined") {
-                if (web3.currentProvider) {
-                    if (Web3.currentProvider.isMetaMask) {
+            if (typeof window.web3 !== "undefined") {
+                if (window.web3.currentProvider) {
+                    if (window.web3.currentProvider.isMetaMask) {
                         window.addEventListener(
                             "ethereum#initialized",
-                            this.updateAccount,
+                            updateAccount,
                             {
                                 once: true,
                             }
@@ -73,15 +75,15 @@ const App = () => {
     return (
         <BrowserRouter>
             <ModalProvider>
+                <Navbar />
+                <Sidebar />
                 <Switch>
-                    <Route element={<Authenticated />}>
-                        <Route element={<Explorer />} path="/" />
-                        <Route element={<MyTokens />} path="/my" />
-                    </Route>
+                    <Route component={() => <Explorer />} path="/" exact={true}/>
+                    <Route component={() => <MyTokens />} path="/my" exact={true}/>
                 </Switch>
             </ModalProvider>
         </BrowserRouter>
     );
 };
 
-export default App;
+export default withRouter(App);

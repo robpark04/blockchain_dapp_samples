@@ -7,8 +7,10 @@ import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
 
 import { injected } from "../../stores/connectors";
-import { store } from "../../stores/store";
 import { emitter } from "../../utils";
+import { getNet } from "../../stores/netReducer";
+import { setAccount, setWeb3Context } from "../../stores/netAction";
+import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 
 import metamaskLogo from "../../img/metamask.png";
 
@@ -16,7 +18,7 @@ import {
     ERROR,
     CONNECTION_DISCONNECTED,
     CONNECTION_CONNECTED,
-} from "../../constants/constants.jsx";
+} from "../../constants/constants";
 
 const styles = (theme) => ({
     root: {
@@ -174,7 +176,8 @@ function onConnectionClicked(
     activate(injected);
 }
 
-function onDeactivateClicked(deactivate, connector, localConnector) {
+function onDeactivateClicked(deactivate, connector, localConnector, dispatch) {
+
     if (deactivate) {
         deactivate();
     }
@@ -184,13 +187,19 @@ function onDeactivateClicked(deactivate, connector, localConnector) {
     if (connector && connector.close) {
         connector.close();
     }
-    store.setStore({ account: {}, web3context: null ,assets: []});
+    dispatch(setAccount(null));
+    dispatch(setWeb3Context(null));
+
     emitter.emit(CONNECTION_DISCONNECTED);
 }
 
 function MyComponent(props) {
+
+    const net = useAppSelector(getNet);
+    const dispatch = useAppDispatch();
+
     const context = useWeb3React();
-    const localContext = store.getStore("web3context");
+    const localContext = net.web3context;
     var localConnector = null;
     if (localContext) {
         localConnector = localContext.connector;
@@ -216,10 +225,8 @@ function MyComponent(props) {
 
     React.useEffect(() => {
         if (account && active && library) {
-            store.setStore({
-                account: { address: account },
-                web3context: context,
-            });
+            dispatch(setAccount({ address: account }));
+            dispatch(setWeb3Context(context));
             emitter.emit(CONNECTION_CONNECTED);
         }
     }, [account, active, closeModal, context, library]);
@@ -324,7 +331,8 @@ function MyComponent(props) {
                         onDeactivateClicked(
                             deactivate,
                             connector,
-                            localConnector
+                            localConnector,
+                            dispatch,
                         );
                     }}
                 >

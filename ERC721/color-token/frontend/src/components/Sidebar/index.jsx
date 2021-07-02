@@ -1,7 +1,7 @@
-import React, { FC, useEffect } from "react";
+import React from "react";
 import { Link, useLocation  } from "react-router-dom";
 
-type Props = {};
+import "../../styles/css/app.css";
 
 function NavLink(props) {
     const location = useLocation ();
@@ -17,7 +17,7 @@ function NavLink(props) {
     );
 }
 
-const Sidebar: FC<Props> = ({ children }) => {
+const Sidebar = ({ children }) => {
     const menus = [
         {
             to: "/", 
@@ -31,7 +31,7 @@ const Sidebar: FC<Props> = ({ children }) => {
     return (
         <>
             <ul
-                className="navbar-nav sidebar sidebar-dark accordion bg-customdark"
+                className="navbar-nav sidebar sidebar-dark accordion bg-dark"
                 id="accordionSidebar"
             >
                 {menus.map((menu, index) => {

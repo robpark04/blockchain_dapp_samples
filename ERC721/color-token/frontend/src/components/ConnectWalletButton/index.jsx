@@ -5,7 +5,7 @@ import UnlockModal from "../Unlock/unlockModal";
 
 import walletImg from "../../img/Ico.png";
 import { useAppSelector } from "../../hooks/hooks";
-import { getNet } from "../../stores/netSlice";
+import { getNet } from "../../stores/netReducer";
 
 const ConnectWalletButton = () => {
     const net = useAppSelector(getNet);

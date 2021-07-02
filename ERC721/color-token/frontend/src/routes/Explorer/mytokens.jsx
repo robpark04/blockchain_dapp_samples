@@ -1,69 +1,64 @@
-import { Component } from "react";
-import { Link, useParams } from "react-router-dom";
-
-import async from "async";
+import React, { Component } from "react";
 import Web3 from "web3";
 import ConnectWalletButton from "../../components/ConnectWalletButton";
 import { SpinnerModal, CompleteModal } from "../../components/Modal";
-import { ERROR, TRANSACTION_FINISHED } from "../../constants/constants.jsx";
 import Color from '../../abis/Color.json'
-import { useAppSelector } from "../../hooks/hooks";
-import { getNet } from "../../stores/netSlice";
+import { getNet } from "../../stores/netReducer";
 import { connect } from "react-redux";
 
-class MyToken extends Component {
+class MyToken extends Component  {
     
   async componentWillMount() {
+    await this.loadWeb3()
     await this.loadBlockchainData()
   }
 
-  async loadBlockchainData() {
-
-    console.log(this.props);
-    
-    // const { net } = this.props;
-
-    // const web3 = new Web3(net.web3context?.library.provider)
-    // //Load accounts
-    // const accounts = net.account
-    // this.setState({ account: net.account })
-
-    // const networkId = await web3.eth.net.getId()
-    // const networkData = Color.networks[networkId]
-    // if (networkData) {
-    //   const abi = Color.abi
-    //   const address = networkData.address
-    //   const contract = new web3.eth.Contract(abi, address)
-    //   this.setState({ contract })
-    //   const totalSupply = await contract.methods.totalSupply().call()
-    //   this.setState({ totalSupply })
-    //   // Load colors
-    //   for (let i = 0; i < totalSupply; i++) {
-    //     const color = await contract.methods.colors(i).call()
-    //     this.setState({
-    //       colors: [...this.state.colors, color]
-    //     })
-    //   }
-    //   console.log(this.state.colors)
-    // } else {
-    //   window.alert("Smart contract not deployed to detected network.");
-    // }
+  loadWeb3 = async () => {
+    if (window.ethereum) {
+      window.web3 = new Web3(window.ethereum)
+      console.log("You have a modern web3 browser!");
+      await window.ethereum.enable()
+    }
+    else if (window.web3) {
+      console.log("You have an older web3 browser!");
+      window.web3 = new Web3(window.web3.currentProvider)
+    }
+    else {
+      window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
+    }
   }
 
-  mint = (color) => {
-    console.log(color);
-    this.state.contract.methods.mint(color).send({from: this.state.account })
-    .once("receipt", (receipt) => {
-      this.setState({
-        colors: [...this.state.colors, color]
-      })
-    })
+  loadBlockchainData = async () => {
+    const web3 = window.web3
+    //Load accounts
+    const accounts = await web3.eth.getAccounts()
+    this.setState({ account: accounts[0] })
+
+    const networkId = await web3.eth.net.getId()
+    const networkData = Color.networks[networkId]
+    if (networkData) {
+      const abi = Color.abi
+      const address = networkData.address
+      const contract = new web3.eth.Contract(abi, address)
+      this.setState({ contract })
+      const totalSupply = await contract.methods.totalSupply().call()
+      this.setState({ totalSupply })
+      // Load colors
+      for (let i = 0; i < totalSupply; i++) {
+        const color = await contract.methods.colors(i).call()
+        this.setState({
+          colors: [...this.state.colors, color]
+        })
+      }
+    } else {
+      window.alert("Smart contract not deployed to detected network.");
+    }
   }
 
   constructor(props) {
     super(props)
     this.state = {
-      account: '',
+      account: null,
       contract: null,
       totalSupply: 0,
       colors: [],
@@ -80,7 +75,7 @@ class MyToken extends Component {
   }
   closeComplete = () => {
     this.setState({
-      CompleteModal: 0
+      completeModal: 0
     });
   }
 
@@ -102,7 +97,6 @@ class MyToken extends Component {
   };
 
   mint = (color) => {
-    console.log(color);
     this.state.contract.methods.mint(color).send({from: this.state.account })
     .once("receipt", (receipt) => {
       this.setState({
@@ -114,11 +108,8 @@ class MyToken extends Component {
   render() {
     return (
         <>
-            {this.state.account.address ? (
-                <div
-                    id="content-wrapper"
-                    className="d-flex flex-column main-margntop home-margintop"
-                >
+            {this.state.account ? (
+                <div className="container-fluid">
                     <div className="row">
                         <main role="main" className="col-lg-12 d-flex text-center">
                         <div className="content mr-auto ml-auto">

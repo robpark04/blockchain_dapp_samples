@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { DialogContent, Dialog, Slide, DialogTitle } from "@material-ui/core";
+import React from "react";
+import { DialogContent, Dialog, DialogTitle } from "@material-ui/core";
 
 import checkmarkImg from "../../img/checkmark.png";
 const etherScanUrl = "https://ropsten.etherscan.io/tx/"
 const CompleteModal = (props) => {
     
-        const { closeModal, modalOpen ,approveUrl, scanUrl ,page} = props;
+        const { closeModal, modalOpen, scanUrl, page} = props;
     
 
         return (

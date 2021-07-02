@@ -1,8 +1,7 @@
-import React, { Component } from "react";
-import { DialogContent, Dialog, Slide } from "@material-ui/core";
+import React from "react";
+import { DialogContent, Dialog } from "@material-ui/core";
 
-import Spinner from "./spinner.jsx";
-
+import Spinner from "./spinner";
 
 const SpinnerModal = (props) => {
     
@@ -14,7 +13,6 @@ const SpinnerModal = (props) => {
                 open={modalOpen}
                 onClose={closeModal} 
                 disableBackdropClick = {true}
-                disableBackdropClick ={true}
             >
                 <DialogContent>
                     <Spinner />
