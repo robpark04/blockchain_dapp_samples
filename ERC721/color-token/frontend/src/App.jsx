@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { ModalProvider } from "@area2k/use-modal";
-import { BrowserRouter, Route, Switch, Redirect, withRouter } from "react-router-dom";
+import { BrowserRouter, Route, Switch, withRouter } from "react-router-dom";
 
 import Explorer from "./routes/Explorer/index";
 import MyTokens from "./routes/Explorer/mytokens";
@@ -11,7 +11,6 @@ import { injected } from "./stores/connectors";
 import { CONNECTION_CONNECTED } from "./constants/constants";
 import { getNet } from "./stores/netReducer";
 import { setAccount, setWeb3Context } from "./stores/netAction";
-import Web3 from "web3";
 import { useAppDispatch, useAppSelector } from "./hooks/hooks";
 import { emitter } from "./utils";
 import Navbar from "./components/Navbar";
