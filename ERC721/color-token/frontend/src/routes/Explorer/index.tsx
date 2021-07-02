@@ -9,6 +9,7 @@ import { ERROR, TRANSACTION_FINISHED } from "../../constants/constants.jsx";
 import Color from '../../abis/Color.json'
 import { useAppSelector } from "../../hooks/hooks";
 import { getNet } from "../../stores/netSlice";
+import { connect } from "react-redux";
 
 class Explorer extends Component {
     
@@ -17,33 +18,35 @@ class Explorer extends Component {
   }
 
   async loadBlockchainData() {
-    const net = useAppSelector(getNet);
+    console.log(this.props);
 
-    const web3 = new Web3(net.web3context?.library.provider)
-    //Load accounts
-    const accounts = net.account
-    this.setState({ account: net.account })
+    // const { net } = this.props;
 
-    const networkId = await web3.eth.net.getId()
-    const networkData = Color.networks[networkId]
-    if (networkData) {
-      const abi = Color.abi
-      const address = networkData.address
-      const contract = new web3.eth.Contract(abi, address)
-      this.setState({ contract })
-      const totalSupply = await contract.methods.totalSupply().call()
-      this.setState({ totalSupply })
-      // Load colors
-      for (let i = 0; i < totalSupply; i++) {
-        const color = await contract.methods.colors(i).call()
-        this.setState({
-          colors: [...this.state.colors, color]
-        })
-      }
-      console.log(this.state.colors)
-    } else {
-      window.alert("Smart contract not deployed to detected network.");
-    }
+    // const web3 = new Web3(net.web3context?.library.provider)
+    // //Load accounts
+    // const accounts = net.account
+    // this.setState({ account: net.account })
+
+    // const networkId = await web3.eth.net.getId()
+    // const networkData = Color.networks[networkId]
+    // if (networkData) {
+    //   const abi = Color.abi
+    //   const address = networkData.address
+    //   const contract = new web3.eth.Contract(abi, address)
+    //   this.setState({ contract })
+    //   const totalSupply = await contract.methods.totalSupply().call()
+    //   this.setState({ totalSupply })
+    //   // Load colors
+    //   for (let i = 0; i < totalSupply; i++) {
+    //     const color = await contract.methods.colors(i).call()
+    //     this.setState({
+    //       colors: [...this.state.colors, color]
+    //     })
+    //   }
+    //   console.log(this.state.colors)
+    // } else {
+    //   window.alert("Smart contract not deployed to detected network.");
+    // }
   }
 
   mint = (color) => {
@@ -126,4 +129,7 @@ class Explorer extends Component {
     }
 };
 
-export default Explorer;
+const mapStateToProps = state => ({
+  net: getNet(state)
+})
+export default connect(mapStateToProps)(Explorer);

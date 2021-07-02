@@ -1,29 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import UnlockModal from "../Unlock/unlockModal.jsx";
-import Store from "../../stores/store.jsx";
-import {
-    CONNECTION_CONNECTED,
-    CONNECTION_DISCONNECTED,
-    GET_RESERVES,
-    CONFIGURE,
-} from "../../constants/constants.jsx";
+import UnlockModal from "../Unlock/unlockModal";
 
-import walletImg from "../../styles/img/Ico.png";
-
-const emitter = Store.emitter;
-const store = Store.store;
-const dispatcher = Store.dispatcher;
+import walletImg from "../../img/Ico.png";
+import { useAppSelector } from "../../hooks/hooks";
+import { getNet } from "../../stores/netSlice";
 
 const ConnectWalletButton = () => {
+    const net = useAppSelector(getNet);
+
     const [showModal, setShowModal] = useState(false);
-    const storeUpdated = () => {
-        const _assets = store.getStore("assets");
-        const _account = store.getStore("account");
-        setAssets([..._assets]);
-        setAccount(_account);
-    };
     function addressClicked() {
         setShowModal(true);
     }

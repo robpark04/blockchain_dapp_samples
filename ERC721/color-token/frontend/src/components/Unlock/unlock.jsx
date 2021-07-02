@@ -7,6 +7,8 @@ import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
 
 import { injected } from "../../stores/connectors";
+import { store } from "../../stores/store";
+import { emitter } from "../../utils";
 
 import metamaskLogo from "../../img/metamask.png";
 
@@ -15,8 +17,6 @@ import {
     CONNECTION_DISCONNECTED,
     CONNECTION_CONNECTED,
 } from "../../constants/constants.jsx";
-
-import { Store } from "../../stores/store";
 
 const styles = (theme) => ({
     root: {
@@ -275,7 +275,7 @@ function MyComponent(props) {
                         METAMASK
                     </Typography>
 
-                    {!activating && !connected && (
+                    {!(injected === activatingConnector) && !(injected === connector || injected === localConnector) && (
                         <img
                             style={{
                                 position: "absolute",
@@ -288,13 +288,13 @@ function MyComponent(props) {
                             alt=""
                         />
                     )}
-                    {activating && (
+                    {(injected === activatingConnector) && (
                         <CircularProgress
                             size={15}
                             style={{ marginRight: "10px" }}
                         />
                     )}
-                    {!activating && connected && (
+                    {!(injected === activatingConnector) && (injected === connector || injected === localConnector) && (
                         <div
                             style={{
                                 background: "#4caf50",

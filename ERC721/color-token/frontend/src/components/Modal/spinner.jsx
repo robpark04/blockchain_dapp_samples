@@ -1,5 +1,4 @@
-import { FC, ReactNode } from "react";
-
+import React from 'react';
 import "../../styles/css/spinner.css";
 
 const Spinner = () => {

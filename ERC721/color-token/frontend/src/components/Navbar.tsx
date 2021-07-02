@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 
-import UnlockModal from "../routes/Unlock/unlockModal.jsx";
+import UnlockModal from "./Unlock/unlockModal.jsx";
 
 import {
     CONNECTION_CONNECTED,
