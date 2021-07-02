@@ -27,7 +27,7 @@ interface IERC165 {
 
 // File: @openzeppelin/contracts/token/ERC721/IERC721.sol
 
-// SPDX-License-Identifier: MIT
+
 
 pragma solidity ^0.8.0;
 
@@ -158,7 +158,7 @@ interface IERC721 is IERC165 {
 
 // File: @openzeppelin/contracts/token/ERC721/IERC721Receiver.sol
 
-// SPDX-License-Identifier: MIT
+
 
 pragma solidity ^0.8.0;
 
@@ -182,7 +182,7 @@ interface IERC721Receiver {
 
 // File: @openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol
 
-// SPDX-License-Identifier: MIT
+
 
 pragma solidity ^0.8.0;
 
@@ -211,7 +211,7 @@ interface IERC721Metadata is IERC721 {
 
 // File: @openzeppelin/contracts/utils/Address.sol
 
-// SPDX-License-Identifier: MIT
+
 
 pragma solidity ^0.8.0;
 
@@ -403,7 +403,7 @@ library Address {
 
 // File: @openzeppelin/contracts/utils/Context.sol
 
-// SPDX-License-Identifier: MIT
+
 
 pragma solidity ^0.8.0;
 
@@ -430,7 +430,7 @@ abstract contract Context {
 
 // File: @openzeppelin/contracts/utils/Strings.sol
 
-// SPDX-License-Identifier: MIT
+
 
 pragma solidity ^0.8.0;
 
@@ -500,7 +500,7 @@ library Strings {
 
 // File: @openzeppelin/contracts/utils/introspection/ERC165.sol
 
-// SPDX-License-Identifier: MIT
+
 
 pragma solidity ^0.8.0;
 
@@ -530,7 +530,7 @@ abstract contract ERC165 is IERC165 {
 
 // File: @openzeppelin/contracts/token/ERC721/ERC721.sol
 
-// SPDX-License-Identifier: MIT
+
 
 pragma solidity ^0.8.0;
 
@@ -908,7 +908,7 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
 
 // File: contracts/Color.sol
 
-// SPDX-License-Identifier: MIT
+
 pragma solidity >=0.4.22 <0.9.0;
 
 
@@ -916,7 +916,7 @@ contract Color is ERC721 {
   string[] public colors;
   mapping(string => bool) _colorExists;
 
-  constructor() ERC721("Color", "COLOR") {
+  constructor() ERC721("Color", "COLOR"){
   }
 
   //e.g. color = "#ffffff"
