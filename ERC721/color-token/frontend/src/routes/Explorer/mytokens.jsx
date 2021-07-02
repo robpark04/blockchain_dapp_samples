@@ -46,9 +46,13 @@ class MyToken extends Component  {
       // Load colors
       for (let i = 0; i < totalSupply; i++) {
         const color = await contract.methods.colors(i).call()
-        this.setState({
-          colors: [...this.state.colors, color]
-        })
+        const ownerAddress = await contract.methods.ownerOf(i+1).call();
+        const isOwner = accounts[0] === ownerAddress;
+        if (isOwner) {
+          this.setState({
+            colors: [...this.state.colors, color]
+          })  
+        }
       }
     } else {
       window.alert("Smart contract not deployed to detected network.");
