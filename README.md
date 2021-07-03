@@ -1,5 +1,11 @@
 <p align="center"><a href="https://blockchain-dapp-sample.netlify.app/" target="_blank"><h1>Blockchain Dapp Samples</h1></a></p>
 
+smart contract address on etherscan
+https://ropsten.etherscan.io/address/0x61f38672da349044601497b6903b722f03f07bb3
+
+
+deployed dapp url
+https://blockchain-dapp-sample.netlify.app
 # ERC721 Color Token
 
 ### Frameworks
@@ -18,7 +24,7 @@ Mint own color tokens and explore the entire color tokens based on ERC721
 3. npx truffle migrate --network ropsten
 4. npx truffle console --network development
 5. npx truffle test
-### CI/CD
+### Dapp CI/CD
 
 * CircleCI
 * Netlify
