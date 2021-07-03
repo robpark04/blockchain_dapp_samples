@@ -47,7 +47,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "netlify link --id d0d7fb7a-bb70-4dfc-9e39-aa3852740edb && netlify deploy --prod"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -59,6 +59,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "gh-pages": "^2.1.1"
+    "netlify-cli": "^2.8.3"
   }
 }
