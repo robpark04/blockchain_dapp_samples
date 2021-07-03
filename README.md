@@ -11,6 +11,13 @@
 
 Mint own color tokens and explore the entire color tokens based on ERC721
 
+### Smart contract compile, build and test
+
+1. npx truffle compile
+2. npx truffle-flattener ./contracts/Color.sol > ./contracts-flatter/FlatColorToken.sol
+3. npx truffle migrate --network ropsten
+4. npx truffle console --network development
+5. npx truffle test
 ### CI/CD
 
 * CircleCI
@@ -19,11 +26,4 @@ Mint own color tokens and explore the entire color tokens based on ERC721
 ### ToDo
 
 <p>Install the MetaMask chrome extension</p>
-
-### Test
-
-```
-cd smart-contract
-npm run test
-```
 
