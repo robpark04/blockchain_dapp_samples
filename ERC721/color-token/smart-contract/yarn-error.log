@@ -1,0 +1,65 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.22.10/libexec/bin/yarn.js run ganache
+
+PATH: 
+  /usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/Volumes/Workspace/test/blockchain-token-sample/ERC721/color-token/smart-contract/node_modules/.bin:/Users/apple/bin:/usr/local/sbin:/usr/local/bin:/usr/local/go/bin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/usr/bin:/bin:/usr/sbin:/sbin:/Users/apple/.cache/zsh4humans/v5/fzf/bin
+
+Yarn version: 
+  1.22.10
+
+Node version: 
+  12.18.4
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: EISDIR: illegal operation on a directory, read
+
+npm manifest: 
+  {
+    "name": "Color-NFT-Smart-Contracts",
+    "version": "1.0.0",
+    "description": "Color ERC-721 Ethereum token and more",
+    "main": "start.js",
+    "scripts": {
+      "lint": "yarn run lint:prettier && yarn run lint:js",
+      "lint:prettier": "prettier . --check",
+      "lint:js": "eslint --ext .js test --fix --ignore-pattern '*.json'",
+      "ganache": "ganache-cli --gasLimit=8000000 --allowUnlimitedContractSize --port 7545 >/dev/null 2>&1 &",
+      "postTest": "kill $(lsof -t -i:7545)",
+      "test": "yarn run ganache && truffle test --show-events --network development --compile-all && yarn run postTest"
+    },
+    "license": "MIT",
+    "dependencies": {
+      "fs": "0.0.1-security",
+      "ganache-core": "^2.13.2",
+      "web3": "^1.3.6"
+    },
+    "devDependencies": {
+      "@openzeppelin/contracts": "^4.1.0",
+      "@openzeppelin/test-helpers": "^0.5.11",
+      "@truffle/hdwallet-provider": "^1.4.1",
+      "eslint": "^7.8.1",
+      "eslint-config-airbnb-base": "^14.2.0",
+      "eslint-config-prettier": "^6.11.0",
+      "eslint-plugin-import": "^2.22.0",
+      "eslint-plugin-prettier": "^3.1.4",
+      "ganache-cli": "^6.10.2",
+      "prettier": "^2.1.1",
+      "prettier-plugin-solidity": "^1.0.0-alpha.57",
+      "solidity-coverage": "^0.7.16",
+      "truffle": "^5.3.13",
+      "truffle-flattener": "^1.5.0",
+      "truffle-typings": "^1.0.8",
+      "chai": "4.2.0",
+      "chai-as-promised": "7.1.1",
+      "chai-bignumber": "3.0.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
