@@ -4,15 +4,15 @@
   "description": "Color ERC-721 Ethereum token and more",
   "main": "start.js",
   "scripts": {
-    "lint": "yarn run lint:prettier && yarn run lint:js",
-    "lint:prettier": "prettier . --check",
-    "lint:js": "eslint --ext .js test --fix --ignore-pattern '*.json'",
-    "ganache": "ganache-cli --gasLimit=8000000 --allowUnlimitedContractSize --port 7545 >/dev/null 2>&1 &",
-    "postTest": "kill $(lsof -t -i:7545)",
-    "test": "yarn run ganache && truffle test --show-events --network development --compile-all && yarn run postTest"
+    "build": "npm run compile",
+    "compile": "truffle compile",
+    "test": "mocha --timeout 100000 --exit --recursive test",
+    "deploy": "truffle migrate --network ropsten",
+    "verify": "truffle run verify Implementation --network mainnet"
   },
   "license": "MIT",
   "dependencies": {
+    "@openzeppelin/test-environment": "^0.1.9",
     "fs": "0.0.1-security",
     "ganache-core": "^2.13.2",
     "web3": "^1.3.6"
@@ -33,6 +33,7 @@
     "truffle": "^5.3.13",
     "truffle-flattener": "^1.5.0",
     "truffle-typings": "^1.0.8",
+    "mocha": "^7.0.0",
     "chai": "4.2.0",
     "chai-as-promised": "7.1.1",
     "chai-bignumber": "3.0.0"

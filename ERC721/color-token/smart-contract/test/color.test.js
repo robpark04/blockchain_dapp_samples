@@ -22,12 +22,12 @@ contract("Color", (accounts) => {
 
     it("has correct name", async () => {
       const name = await contract.name();
-      assert.equal(name, "Color");
+      assert.equal(name, "ColorToken");
     })
 
     it("has a symbol", async () => {
       const symbol = await contract.symbol();
-      assert.equal(symbol, "COLOR");
+      assert.equal(symbol, "CLRT");
     })
   })
 
