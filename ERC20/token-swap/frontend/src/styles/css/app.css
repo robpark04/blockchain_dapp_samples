@@ -1,0 +1,42 @@
+/* Styles go here */
+.token {
+  height: 50px;
+  width: 150px;
+  border-radius: 10px;
+}
+
+.sidebar {
+  height: calc(100vh - 55px);
+  width: 200px;
+  padding-top: 20px;
+  position: absolute;
+  left: 0;
+  top: 55px;
+}
+
+.sidebar .nav-item {
+  padding-left: 10px;
+  padding-left: 10px;
+}
+
+.sidebar .nav-item .nav-link {
+  color: lightgray!important;
+}
+
+.sidebar .nav-item.active{
+  background: #3a3f48;
+}
+
+.sidebar .nav-item.active .nav-link {
+  color: white!important;
+}
+
+.container-fluid {
+  margin-left: 200px;
+  margin-top: 200px;
+  width: calc(100vw - 200px);
+}
+
+.w100 {
+  width: 100%;
+}

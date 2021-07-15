@@ -1,4 +1,4 @@
-<p align="center"><a href="https://blockchain-dapp-sample.netlify.app/" target="_blank"><h1>Blockchain Dapp Samples</h1></a></p>
+<p align="center"><a href="https://blockchain-dapp-sample.netlify.app/" target="_blank"><h1>ERC721 color token</h1></a></p>
 
 smart contract address on etherscan
 https://ropsten.etherscan.io/address/0x61f38672da349044601497b6903b722f03f07bb3

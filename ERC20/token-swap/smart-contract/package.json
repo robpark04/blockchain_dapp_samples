@@ -1,12 +1,44 @@
 {
-  "name": "smart-contract",
+  "name": "token-swap-smart-contract",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
+  "description": "smart contract for token swapping",
   "author": "",
-  "license": "ISC"
+  "keywords": [],
+  "license": "MIT",
+  "scripts": {
+    "build": "truffle compile",
+    "migrate": "truffle migrate",
+    "migrate:local": "truffle migrate --network local",
+    "migrate:develop": "truffle migrate --network development",
+    "migrate:ropsten": "yarn build && truffle migrate --network ropsten",
+    "migrate:rinkeby": "yarn build && truffle migrate --network rinkeby",
+    "console:local": "truffle console --network local",
+    "console:develop": "truffle console --network development",
+    "console:ropsten": "truffle console --network ropsten",
+    "console:rinkeby": "truffle console --network rinkeby",
+    "ganache": "npx ganache-cli --deterministic",
+    "test": "truffle test",
+    "coverage": "truffle run coverage",
+    "clean": "rm -rf ./build/ ./coverage/ coverage.json",
+    "prettier": "prettier --write ./contracts/**/**/*.sol ./test/**/**/*.js",
+    "lint": "yarn lint:sol",
+    "lint:sol": "solhint contracts/**/*.sol contracts/*.sol",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.2.0",
+    "@truffle/hdwallet-provider": "^1.4.1",
+    "dotenv": "^10.0.0",
+    "ganache-core": "^2.13.2",
+    "prettier": "^2.3.2",
+    "prettier-plugin-solidity": "^1.0.0-beta.15",
+    "shelljs": "^0.8.4",
+    "snyk": "^1.660.0",
+    "solidity-coverage": "^0.7.16",
+    "solidity-docgen": "^0.5.13",
+    "truffle": "^5.4.0",
+    "truffle-assertions": "^0.9.2",
+    "uuidv4": "^6.2.11"
+  }
 }
