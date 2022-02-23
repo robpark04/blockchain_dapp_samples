@@ -48,10 +48,10 @@ The gas report will be saved on the `/reports` folder.
 
 Create/modify network config in hardhat.config.ts and add API key and private key, then run:
 
-`npx hardhat run --network rinkeby scripts/deploy.ts`
+`npx hardhat run --network ropsten scripts/deploy.ts`
 
 ### Verify on Etherscan
 
 Using the hardhat-etherscan plugin, add Etherscan API key to hardhat.config.ts, then run:
 
-`npx hardhat verify --network rinkeby <DEPLOYED ADDRESS>`
+`npx hardhat verify --network ropsten <DEPLOYED ADDRESS>`
