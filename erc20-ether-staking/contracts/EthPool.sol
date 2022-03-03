@@ -23,6 +23,9 @@ contract EthPool is Ownable {
     /** @dev track total staked amount */
     uint public totalStaked;
 
+    /** @dev track total reward amount */
+    uint public totalReward;
+
 
     event NotifyDeposit(address sender, uint amount, uint totalAmount);
     event NotifyWithdraw(address sender, uint amount, uint reward);
@@ -40,20 +43,33 @@ contract EthPool is Ownable {
 
         emit NotifyDeposit(msg.sender, amount, user.amount);
     }
-    function withdraw() public {
+    function withdraw(uint256 withdrawAmount) public {
+        updatePool();
+
         address payable recipient = payable(msg.sender);
         UserInfo storage user = userInfo[msg.sender];
-        uint256 amount = user.amount + user.reward;
+
+        require(withdrawAmount <= user.amount, "Withdraw amount should be less than user amount");
+        uint256 amount = withdrawAmount + user.reward;
         recipient.transfer(amount);
-        emit NotifyWithdraw(msg.sender, user.amount, user.reward);
-        user.amount = user.reward = 0;
+        totalStaked = totalStaked - withdrawAmount;
+        emit NotifyWithdraw(msg.sender, withdrawAmount, user.reward);
+        user.amount = user.amount - withdrawAmount;
+        user.reward = 0;
+    }
+
+    function updatePool() internal {
+        if (totalReward > 0) {
+            for (uint i=0; i<userAddrs.length; i++) {
+                UserInfo storage user = userInfo[userAddrs[i]];
+                user.reward = user.reward + totalReward * user.amount / totalStaked;
+            }
+            totalReward = 0;
+        }
     }
 
     function depositReward() public onlyOwner payable {
         uint256 amount = msg.value;
-        for (uint i=0; i<userAddrs.length; i++) {
-            UserInfo storage user = userInfo[userAddrs[i]];
-            user.reward = amount / totalStaked * user.amount;
-        }
+        totalReward = totalReward + amount;
     }        
 }
